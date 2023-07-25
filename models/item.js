@@ -14,11 +14,39 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Item.init({
-    name: DataTypes.STRING,
-    option_id: DataTypes.BIGINT,
-    price: DataTypes.BIGINT,
-    type: DataTypes.ENUM,
-    amount: DataTypes.BIGINT
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
+    name: {
+      type: Sequelize.STRING
+    },
+    option_id: {
+      type: Sequelize.BIGINT
+    },
+    price: {
+      type: Sequelize.BIGINT
+    },
+    type: {
+      allowNull: false,
+      type: Sequelize.ENUM("coffee", "juice", "food"),
+      defaultValue: 'coffee',
+    },
+    amount: {
+      type: Sequelize.BIGINT
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: DataTypes.NOW
+    }
   }, {
     sequelize,
     modelName: 'Item',

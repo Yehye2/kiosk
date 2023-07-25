@@ -19,18 +19,22 @@ module.exports = {
         type: Sequelize.BIGINT
       },
       type: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('coffee', 'juice', 'food'),
+        allowNull: false,
+        defaultValue: 'coffee',
       },
       amount: {
         type: Sequelize.BIGINT
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now")
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now")
       }
     });
   },
