@@ -14,10 +14,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Option.init({
-    extra_price: DataTypes.BIGINT,
-    shot_price: DataTypes.BIGINT,
-    hot: DataTypes.BOOLEAN
-  }, {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
+    extra_price: {
+      type: Sequelize.BIGINT
+    },
+    shot_price: {
+      type: Sequelize.BIGINT
+    },
+    hot: {
+      type: Sequelize.BOOLEAN
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: DataTypes.NOW
+    },
     sequelize,
     modelName: 'Option',
   });
