@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'html', 'item.html'));
 });
 
+app.get('/itemManagement', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'html', 'itemManagement.html'));
+});
+
 // 서버 실행
 const port = 3000;
 app.listen(port, () => {
