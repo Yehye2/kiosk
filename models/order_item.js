@@ -2,35 +2,27 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-class Item extends Model {
+class order_item extends Model {
   static associate(models) {
-    // Define association with order_time model using item_id
-    Item.hasMany(models.order_item, { foreignKey: 'item_id', as: 'order_items' });
+    // Define association with Item model
+    order_item.belongsTo(models.Item, { foreignKey: 'item_id', as: 'item' });
   }
 }
 
-Item.init({
+order_item.init({
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  name: {
-    type: DataTypes.STRING
-  },
-  option_id: {
+  item_id: {
     type: DataTypes.BIGINT
-  },
-  price: {
-    type: DataTypes.BIGINT
-  },
-  type: {
-    allowNull: false,
-    type: DataTypes.ENUM('coffee', 'juice', 'food'),
-    defaultValue: 'coffee',
   },
   amount: {
+    type: DataTypes.BIGINT
+  },
+  state: {
     type: DataTypes.BIGINT
   },
   createdAt: {
@@ -45,7 +37,7 @@ Item.init({
   }
 }, {
   sequelize,
-  modelName: 'Item',
+  modelName: 'order_item',
 });
 
-module.exports = Item;
+module.exports = order_item;

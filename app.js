@@ -6,9 +6,11 @@ app.use(express.json());
 
 // API 파일 임포트
 const itemRoutes = require('./routes/items');
+const orderRoutes = require('./routes/order_item');
 
 // 라우터 등록
 app.use('/items', itemRoutes);
+app.use('/order', orderRoutes);
 
 // 정적 파일 제공
 app.use(express.static('public'));
