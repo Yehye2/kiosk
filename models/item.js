@@ -6,7 +6,8 @@ class Item extends Model {
   static associate(models) {
     // Define association with order_time model using item_id
     Item.hasMany(models.order_item, { foreignKey: 'item_id', as: 'order_items' });
-    Item.belongsTo(models.Option, { foreignKey: 'option_id', as: 'Options' });
+    Item.hasMany(models.item_order_customer, { foreignKey: 'item_id', as: 'item_order_customers' });
+    Item.belongsTo(models.Option, { foreignKey: 'option_id', as: 'option' });
   }
 }
 

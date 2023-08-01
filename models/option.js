@@ -4,7 +4,8 @@ const sequelize = require('../db');
 class Option extends Model {
   static associate(models) {
     // Define association with Item model
-    Option.hasMany(models.item, { foreignKey: 'option_id', as: 'Options' });
+    Option.hasMany(models.item, { foreignKey: 'option_id', as: 'item' });
+    Option.hasMany(models.item_order_customer, { foreignKey: 'option_id', as: 'item_order_customers' });
   }
 }
 Option.init({
@@ -18,6 +19,9 @@ Option.init({
     type: DataTypes.BIGINT
   },
   shot_price: {
+    type: DataTypes.BIGINT
+  },
+  price: {
     type: DataTypes.BIGINT
   },
   hot: {

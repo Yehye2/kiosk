@@ -19,7 +19,7 @@ let cachedOptions = []; // 서버 메모리에 옵션 데이터를 캐싱할 전
 
 // 상품 옵션 추가 API
 router.post('/', async (req, res) => {
-    const { itemId, extra_price, shot_price, hot } = req.body;
+    const { extra_price, shot_price, hot } = req.body;
 
     try {
         // 상품에 옵션을 추가합니다.
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
             extra_price,
             shot_price,
             hot,
-            itemId,
+            price: extra_price + shot_price, // 여기서 price를 extra_price와 shot_price의 합으로 계산하여 저장합니다.
         });
 
         // 옵션 추가 시, 메모리 캐시를 갱신합니다.
@@ -59,9 +59,9 @@ router.delete('/:optionId', async (req, res) => {
 });
 
 // 상품의 옵션 조회 API
-router.get('/:itemId', async (req, res) => {
-    const { itemId } = req.params;
-    console.log(itemId)
+router.get('/:optionId', async (req, res) => {
+    const { optionId } = req.params;
+    console.log(optionId);
 
     try {
         // 서버 메모리에 캐싱된 옵션 데이터를 반환합니다.
@@ -69,17 +69,17 @@ router.get('/:itemId', async (req, res) => {
             cachedOptions = await Option.findAll();
         }
 
-        // 상품에 해당하는 옵션들을 가져옵니다.
-        const options = cachedOptions.filter((option) => option.ItemId === parseInt(itemId));
+        // 옵션 ID에 해당하는 옵션을 가져옵니다.
+        const option = cachedOptions.find((option) => option.id === parseInt(optionId));
 
-        if (options.length === 0) {
-            return res.status(404).json({ message: '해당 상품의 옵션이 없습니다.' });
+        if (!option) {
+            return res.status(404).json({ message: '해당 옵션을 찾을 수 없습니다.' });
         }
 
-        res.json(options);
+        res.json(option);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: '상품 옵션 조회 중에 오류가 발생했습니다.' });
+        res.status(500).json({ message: '옵션 조회 중에 오류가 발생했습니다.' });
     }
 });
 

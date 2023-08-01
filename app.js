@@ -8,11 +8,13 @@ app.use(express.json());
 const itemRoutes = require('./routes/items');
 const orderRoutes = require('./routes/order_item');
 const optionRoutes = require('./routes/option');
+const itemOrderCustomerRoutes = require('./routes/item_order_customer');
 
 // 라우터 등록
 app.use('/items', itemRoutes);
 app.use('/order', orderRoutes);
 app.use('/option', optionRoutes);
+app.use('/item_order', itemOrderCustomerRoutes);
 
 // 정적 파일 제공
 app.use(express.static('public'));
@@ -20,6 +22,11 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'html', 'item.html'));
 });
+
+app.get('/item_order_customer', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'html', 'item_order_customer.html'));
+});
+
 
 app.get('/itemManagement', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'html', 'itemManagement.html'));

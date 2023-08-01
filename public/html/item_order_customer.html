@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>주문 고객 테스트</title>
+</head>
+
+<body>
+    <h1>주문 고객 테스트</h1>
+    <label for="item_id">물품 ID:</label>
+    <input type="text" id="item_id" name="item_id" required><br>
+
+    <label for="option_id">옵션 ID:</label>
+    <input type="text" id="option_id" name="option_id" required><br>
+
+    <label for="amount">수량:</label>
+    <input type="text" id="amount" name="amount" required><br>
+
+    <button onclick="createItemOrder()">물품 주문 생성</button>
+
+    <hr>
+
+    <h1>주문 정보 조회 테스트</h1>
+    <label for="order_id">주문 ID:</label>
+    <input type="text" id="order_id" name="order_id" required><br>
+
+    <button onclick="getOrderInfo()">주문 정보 조회</button>
+
+    <hr>
+
+    <h1>주문 상태 업데이트 테스트</h1>
+    <label for="update_order_id">주문 ID:</label>
+    <input type="text" id="update_order_id" name="update_order_id" required><br>
+
+    <label for="state">주문 상태 (true 또는 false):</label>
+    <input type="text" id="state" name="state" required><br>
+
+    <button onclick="updateOrderState()">주문 상태 업데이트</button>
+
+    <script src="javascript/item.order_customer.js"></script>
+</body>
+
+</html>
